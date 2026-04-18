@@ -6,14 +6,12 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "authshift",
 	"main": "src/index.ts",
-	"compatibility_date": "2026-04-02",
+	"compatibility_date": "2026-03-10",
 	"observability": {
-		"enabled": true
+		"enabled": true,
 	},
 	"upload_source_maps": true,
-	"compatibility_flags": [
-		"nodejs_compat"
-	]
+	"compatibility_flags": ["nodejs_compat"],
 	/**
 	 * Smart Placement
 	 * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement

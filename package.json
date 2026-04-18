@@ -7,12 +7,36 @@
 		"dev": "wrangler dev",
 		"start": "wrangler dev",
 		"test": "vitest",
+		"typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p test/tsconfig.json",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
+		"format": "prettier . --write",
+		"format:check": "prettier . --check",
+		"check": "pnpm run typecheck && pnpm run lint && pnpm run test --run",
 		"cf-typegen": "wrangler types"
 	},
+	"dependencies": {
+		"@babel/parser": "^7.29.2",
+		"@babel/traverse": "^7.29.0",
+		"@octokit/app": "^16.1.2",
+		"@octokit/auth-app": "^8.2.0",
+		"@octokit/rest": "^22.0.1",
+		"@octokit/webhooks": "^13.0.0"
+	},
 	"devDependencies": {
+		"@babel/types": "^7.29.0",
 		"@cloudflare/vitest-pool-workers": "^0.12.4",
+		"@cloudflare/workers-types": "^4.20260402.1",
+		"@eslint/js": "^10.0.1",
+		"@types/babel__parser": "^7.1.5",
+		"@types/babel__traverse": "^7.28.0",
 		"@types/node": "^25.5.0",
+		"eslint": "^10.2.1",
+		"eslint-config-prettier": "^10.1.8",
+		"globals": "^17.5.0",
+		"prettier": "^3.8.3",
 		"typescript": "^5.5.2",
+		"typescript-eslint": "^8.58.2",
 		"vitest": "~3.2.0",
 		"wrangler": "^4.80.0"
 	}

@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Prepare test environment variables
+        run: |
+          cat <<'EOF' > .dev.vars
+          GITHUB_WEBHOOK_SECRET=local_dev_secret_123
+          GITHUB_APP_ID=12345
+          GITHUB_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----\nCI_TEST_KEY\n-----END PRIVATE KEY-----
+          EOF
+
+      - name: Run quality checks
+        run: pnpm run check
